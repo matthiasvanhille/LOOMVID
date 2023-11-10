@@ -1,0 +1,11 @@
+node_modules
+.github
+.vscode
+dist
+.DS_Store
+.env
+screenshots/*
+video/*
+
+# Ignore the output video from Git but not videos you import into src/.
+out
