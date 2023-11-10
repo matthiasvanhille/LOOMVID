@@ -14,20 +14,35 @@ const corsOptions = {
 };
 
 const ffmpeg = require('fluent-ffmpeg');
-const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
+// const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
 
 app.use(cors(corsOptions));
 app.get('/capture', async (req, res) => {
     const { url, videoLink } = req.query;
     try {
-        const browser = await puppeteer.launch();
+        const browser = await puppeteer.launch({
+            executablePath: '/usr/bin/google-chrome',
+            headless: "new",
+            args: [
+                '--no-sandbox',
+                '--start-fullscreen',
+                '--disable-gpu',
+                '--disable-setuid-sandbox',
+                "--window-size=1920,1080",
+                "--ozone-override-screen-size=1920,1080"
+            ],
+            defaultViewport: {
+                width: 1920,
+                height: 1080
+            }
+        });
         const page = await browser.newPage();
-        await page.setViewport({
-            width: 1920,
-            height: 1080,
-            deviceScaleFactor: 1,
-          });
-          
+        // await page.setViewport({
+        //     width: 1920,
+        //     height: 1080,
+        //     deviceScaleFactor: 1,
+        // });
+
         const recorder = new PuppeteerScreenRecorder(page);
         await page.goto(url);
         await recorder.start('./video/simple.mp4'); // Use an absolute path to save the video
@@ -53,7 +68,8 @@ app.get('/capture', async (req, res) => {
         res.setHeader('Content-Type', 'video/mp4');
         res.setHeader('Content-Length', videoData.length);
 
-        ffmpeg.setFfmpegPath(ffmpegPath);
+        // ffmpeg.setFfmpegPath(ffmpegPath);
+        ffmpeg.setFfmpegPath('/usr/bin/ffmpeg')
         const outputPath = './combineVideo/output.mp4'; // Replace with the desired output filename
         const corner_radius = 100;
         await new Promise((resolve, reject) => {
