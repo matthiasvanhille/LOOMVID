@@ -25,11 +25,11 @@ app.get('/capture', async (req, res) => {
             headless: "new",
             args: [
                 '--no-sandbox',
-                '--start-fullscreen',
+                // '--start-fullscreen',
                 '--disable-gpu',
                 '--disable-setuid-sandbox',
-                "--window-size=1920,1080",
-                "--ozone-override-screen-size=1920,1080"
+                // "--window-size=1920,1080",
+                // "--ozone-override-screen-size=1920,1080"
             ],
             defaultViewport: {
                 width: 1920,
@@ -98,7 +98,7 @@ app.get('/capture', async (req, res) => {
                     },
                     {
                         filter: 'overlay',
-                        options: { x: 10, y: 870 },
+                        options: { x: 10, y: 400 },
                         inputs: ['0:v', 'v_mask'],
                         outputs: 'output_video',
                     },
