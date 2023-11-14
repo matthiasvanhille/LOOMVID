@@ -52,7 +52,7 @@ const ProgressScreen: React.FC<Props> = ({ filteredCsvData, uploadedVideoLink })
         }
         const url = urls[0].url;
         try {
-            const response = await axios.get(`http://localhost:3001/capture?url=${url}&videoLink=${uploadedVideoLink}`); 
+            const response = await axios.get(`http://13.48.71.114:3001/capture?url=${url}&videoLink=${uploadedVideoLink}`); 
             if (response.status === 200) {  
                 setVideoLink((prevVideoLink: any) => {
                     const newArray = [...prevVideoLink];
