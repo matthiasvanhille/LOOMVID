@@ -31,10 +31,10 @@ app.get('/capture', async (req, res) => {
                 // "--window-size=1920,1080",
                 // "--ozone-override-screen-size=1920,1080"
             ],
-            defaultViewport: {
-                width: 1920,
-                height: 1080
-            }
+            // defaultViewport: {
+            //     width: 1920,
+            //     height: 1080
+            // }
         });
         const page = await browser.newPage();
         // await page.setViewport({
@@ -98,7 +98,7 @@ app.get('/capture', async (req, res) => {
                     },
                     {
                         filter: 'overlay',
-                        options: { x: 10, y: 400 },
+                        options: { x: 10, y: 250 },
                         inputs: ['0:v', 'v_mask'],
                         outputs: 'output_video',
                     },
