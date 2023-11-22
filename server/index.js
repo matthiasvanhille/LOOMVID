@@ -28,7 +28,7 @@ app.get('/capture', async (req, res) => {
                 // '--start-fullscreen',
                 '--disable-gpu',
                 '--disable-setuid-sandbox',
-                "--window-size=1920,1080",
+                // "--window-size=1920,1080",
                 // "--ozone-override-screen-size=1920,1080"
             ],
             // defaultViewport: {
@@ -40,12 +40,12 @@ app.get('/capture', async (req, res) => {
         const recorder = new PuppeteerScreenRecorder(page);
         await page.goto(url);
 
-        const client = await page.target().createCDPSession();
-        await client.send('Emulation.clearDeviceMetricsOverride');
-        await page.setViewport({
-            width: 1920,
-            height: 1080
-        });
+        // const client = await page.target().createCDPSession();
+        // await client.send('Emulation.clearDeviceMetricsOverride');
+        // await page.setViewport({
+        //     width: 1920,
+        //     height: 1080
+        // });
 
         await recorder.start('./video/simple.mp4'); // Use an absolute path to save the video
 
@@ -100,7 +100,7 @@ app.get('/capture', async (req, res) => {
                     },
                     {
                         filter: 'overlay',
-                        options: { x: 10, y: 870 },
+                        options: { x: 10, y: 250 }, // 870
                         inputs: ['0:v', 'v_mask'],
                         outputs: 'output_video',
                     },
